@@ -5,6 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0a145a6-47c1-4866-836c-627f529b6e75" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/MainLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/images/caesar.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/images/carbonara.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/public/images/margherita.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/RecipeSelection.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RecipeSelection.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
     </list>
@@ -12,6 +18,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,6 +52,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -51,7 +65,8 @@
       <option name="presentableId" value="Default" />
       <updated>1700317186371</updated>
       <workItem from="1700317187391" duration="786000" />
-      <workItem from="1700320011498" duration="1757000" />
+      <workItem from="1700320011498" duration="2670000" />
+      <workItem from="1700322697200" duration="5326000" />
     </task>
     <servers />
   </component>

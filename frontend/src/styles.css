@@ -3,11 +3,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #ffffff;
-    padding: 20px;
+    justify-content: flex-start; /* Align content to the top */
+    margin-top: 80px; /* Adjust this to match the height of your header */
+    background-color: #f4f4f4;
+    padding: 20px 20px 50px; /* Padding at the bottom for extra space */
 }
+
+
 
 .select-input {
     width: 200px;
@@ -51,26 +53,34 @@
   
   /* src/styles.css */
 .header {
+    height: 80px; /* Ensure this is the actual height of your header */
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other content */
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
     padding: 10px 20px;
   }
+
+body {
+    background-color: #f4f4f4; /* Set your desired background color */
+    margin: 0;
+    padding: 0;
+}
+
   
   .header img {
     height: 50px; /* Adjust the height as needed */
   }
-  
-  .page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: calc(100vh - 70px); /* Subtract header height */
-    background-color: #f4f4f4;
-    padding: 20px;
-  }
+
+.header .logo {
+    height: 50px; /* Adjust as needed */
+}
+
+
 
 /* src/styles.css */
 .recipe-grid {
@@ -81,16 +91,21 @@
 }
 
 .recipe-card {
-    border: 1px solid #ddd;
+    border: 1px solid grey; /* 1px grey border for unselected cards */
+    outline: 3px solid transparent; /* Transparent outline for all cards */
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, outline-color 0.3s ease;
+    flex: 0 0 auto; /* Prevent cards from shrinking */
+    width: 200px; /* Adjust the width as needed */
+    height: auto; /* Height adjusts to content */
+
 }
 
 .recipe-card.selected {
-    border: 3px solid #54db54; /* Thicker green border for selected cards */
-
+    border-color: #54db54; /* Make border transparent when selected */
+    outline-color: #54db54; /* Green outline for selected cards */
 }
 
 .recipe-card:hover {
@@ -100,13 +115,15 @@
 
 .recipe-image {
     width: 100%;
-    height: 150px; /* Adjust based on your design preference */
+    height: 150px; /* Adjust this value as needed */
     object-fit: cover;
 }
 
 .recipe-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
-    text-align: center;
 }
 
 .info-button {
@@ -123,4 +140,63 @@
 .info-button:hover {
     background-color: #379a3f;
 }
-  
+
+.recipe-row {
+    display: flex;
+    justify-content: center; /* Centering items horizontally */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 20px;
+    width: 100%; /* Set width to 100% of container */
+    margin-bottom: 20px; /* Space between rows */
+}
+
+.recipe-title {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.info-icon {
+    color: #4caf50; /* Subtle green color */
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.info-icon:hover {
+    color: #388e3c; /* Slightly darker green on hover */
+}
+
+
+/* src/styles.css */
+.your-custom-modal-class {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    marginRight: -50%;
+    transform: translate(-50%, -50%);
+    width: 50%; /* Adjust as needed */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.your-custom-overlay-class {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backgroundColor: rgba(0, 0, 0, 0.75);
+}
+
+.your-custom-modal-class:focus {
+    outline: none; /* Removes the default focus outline */
+}
+
+
+
