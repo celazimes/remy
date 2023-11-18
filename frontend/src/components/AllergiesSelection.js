@@ -4,14 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import '../styles.css'; // Import the shared CSS file
 
 const allergies = [
-  { id: 1, name: 'Milk & Dairy', imageUrl: '/images/carbonara.jpeg' },
-  { id: 2, name: 'Eggs', imageUrl: '/images/carbonara.jpeg' },
-  { id: 3, name: 'Peanuts', imageUrl: '/images/carbonara.jpeg' },
-  { id: 4, name: 'Tree nuts', imageUrl: '/images/carbonara.jpeg' },
-  { id: 5, name: 'Soy', imageUrl: '/images/carbonara.jpeg' },
-  { id: 6, name: 'Wheat & Gluten', imageUrl: '/images/carbonara.jpeg' },
-  { id: 7, name: 'Fish', imageUrl: '/images/carbonara.jpeg' },
-  { id: 8, name: 'Shellfish', imageUrl: '/images/carbonara.jpeg' },
+  { id: 1, name: 'Milk & Dairy', imageUrl: '/images/milkd.jpeg' },
+  { id: 2, name: 'Eggs', imageUrl: '/images/eggs.webp' },
+  { id: 3, name: 'Peanuts', imageUrl: '/images/peanuts.jpeg' },
+  { id: 4, name: 'Tree nuts', imageUrl: '/images/tnut.webp' },
+  { id: 5, name: 'Soy', imageUrl: '/images/soy.jpeg' },
+  { id: 6, name: 'Wheat & Gluten', imageUrl: '/images/wheat.webp' },
+  { id: 7, name: 'Fish', imageUrl: '/images/fish.webp' },
+  { id: 8, name: 'Shellfish', imageUrl: '/images/shellfish.jpeg' },
   // ...add more allergies
 ];
 
@@ -85,7 +85,7 @@ function AllergiesSelection() {
     <div>
       <style>{allergyStyles}</style>
       <div className="page-container">
-        <h2>Select your allergies</h2>
+        <h2>Do you have any allergies?</h2>
         <div className="allergy-grid">
           {allergies.map((allergy) => (
             <div

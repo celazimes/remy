@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import '../styles.css'; // Import the shared CSS file
 
 const dietaryOptions = [
-  { id: 'Vegetarian', label: 'Vegetarian', imageUrl: '/images/carbonara.jpeg' },
-  { id: 'Vegan', label: 'Vegan', imageUrl: '/images/carbonara.jpeg' },
-  { id: 'Halal', label: 'Halal', imageUrl: '/images/carbonara.jpeg' },
-  { id: 'Kosher', label: 'Kosher', imageUrl: '/images/carbonara.jpeg' },
+  { id: 'Vegetarian', label: 'Vegetarian', imageUrl: '/images/vegetarian.png' },
+  { id: 'Vegan', label: 'Vegan', imageUrl: '/images/vegan.jpeg' },
+  { id: 'Halal', label: 'Halal', imageUrl: '/images/halal.jpeg' },
+  { id: 'Kosher', label: 'Kosher', imageUrl: '/images/kosher.webp' },
   // ...add more options
 ];
 
