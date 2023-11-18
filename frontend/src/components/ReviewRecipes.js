@@ -30,24 +30,23 @@ function ReviewRecipes({ selectedRecipess }) {
 
     return (
         <div className="page-container">
-            <h2>Review Recipes</h2>
             {/* Display selected recipes with rating sliders */}
             {selectedRecipes.map(recipe => (
-                <div key={recipe.id} className="recipe-review" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                    <div style={{ flex: '1', marginRight: '20px' }}>
+                <div key={recipe.id} className="recipe-review" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px'}}>
+                    <div className="recipe-card" style={{marginRight: '20px'}}>
+                        <img src={recipe.imageUrl} alt={recipe.name} style={{ width: '300px', height: 'auto', maxHeight:'150px'}} />
                         <h3>{recipe.name}</h3>
-                        <img src={recipe.imageUrl} alt={recipe.name} style={{ maxWidth: '150px', height: 'auto' }} />
                     </div>
                     <div style={{ flex: '1', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                         <p>Rate this recipe:</p>
                         <input
                             type="range"
-                            min="1"
+                            min="0"
                             max="10"
-                            value={ratings[recipe.id] || 1} // Default value is 1
+                            value={ratings[recipe.id] || 5} // Default value is 1
                             onChange={(e) => handleRatingChange(recipe.id, parseInt(e.target.value, 10))}
                         />
-                        <span>{ratings[recipe.id] || 1}</span>
+                        <span>{ratings[recipe.id] || 5}</span>
                     </div>
                 </div>
             ))}

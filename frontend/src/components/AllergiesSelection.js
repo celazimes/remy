@@ -56,6 +56,8 @@ function AllergiesSelection() {
       height: 100%; /* Set the height to 100% to fill the container */
       display: flex;
       flex-direction: column;
+      width: auto; /* Adjust the width as needed */
+      height: 200px; /* Height adjusts to content */
     }
 
     .allergy-card.selected {
