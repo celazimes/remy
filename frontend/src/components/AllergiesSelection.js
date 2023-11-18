@@ -4,9 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import '../styles.css'; // Import the shared CSS file
 
 const allergies = [
-  { id: 1, name: 'Peanuts', imageUrl: '/images/carbonara.jpeg' },
-  { id: 2, name: 'DEEZ NUTS', imageUrl: '/images/carbonara.jpeg' },
-  { id: 3, name: 'jeff', imageUrl: '/images/carbonara.jpeg' },
+  { id: 1, name: 'Milk & Dairy', imageUrl: '/images/carbonara.jpeg' },
+  { id: 2, name: 'Eggs', imageUrl: '/images/carbonara.jpeg' },
+  { id: 3, name: 'Peanuts', imageUrl: '/images/carbonara.jpeg' },
+  { id: 4, name: 'Tree nuts', imageUrl: '/images/carbonara.jpeg' },
+  { id: 5, name: 'Soy', imageUrl: '/images/carbonara.jpeg' },
+  { id: 6, name: 'Wheat & Gluten', imageUrl: '/images/carbonara.jpeg' },
+  { id: 7, name: 'Fish', imageUrl: '/images/carbonara.jpeg' },
+  { id: 8, name: 'Shellfish', imageUrl: '/images/carbonara.jpeg' },
   // ...add more allergies
 ];
 
@@ -37,7 +42,7 @@ function AllergiesSelection() {
 
     .allergy-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* Adjust based on your design preference */
+      grid-template-columns: repeat(4, 1fr); /* Adjust based on your design preference */
       gap: 20px;
       margin: 20px 0;
     }
@@ -48,6 +53,9 @@ function AllergiesSelection() {
       overflow: hidden;
       cursor: pointer;
       transition: border-color 0.3s ease;
+      height: 100%; /* Set the height to 100% to fill the container */
+      display: flex;
+      flex-direction: column;
     }
 
     .allergy-card.selected {
@@ -61,28 +69,15 @@ function AllergiesSelection() {
 
     .allergy-image {
       width: 100%;
-      height: 150px; /* Adjust based on your design preference */
+      height: 80%; /* Adjust based on your design preference */
       object-fit: cover;
     }
 
     .allergy-info {
       padding: 10px;
       text-align: center;
-    }
-
-    .info-button {
-      padding: 5px 10px;
-      background-color: #54db54;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
-    }
-
-    .info-button:hover {
-      background-color: #379a3f;
+      height: 50%; /* Adjust based on your design preference */
+      overflow: hidden;
     }
   `;
 
@@ -103,7 +98,6 @@ function AllergiesSelection() {
               <img src={allergy.imageUrl} alt={allergy.name} className="allergy-image" />
               <div className="allergy-info">
                 <h3>{allergy.name}</h3>
-                <button className="info-button">More Info</button>
               </div>
             </div>
           ))}
