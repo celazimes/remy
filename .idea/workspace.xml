@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c0a145a6-47c1-4866-836c-627f529b6e75" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/RecipeSelection.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RecipeSelection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +62,7 @@
       <updated>1700317186371</updated>
       <workItem from="1700317187391" duration="786000" />
       <workItem from="1700320011498" duration="2670000" />
-      <workItem from="1700322697200" duration="13386000" />
+      <workItem from="1700322697200" duration="14729000" />
     </task>
     <servers />
   </component>

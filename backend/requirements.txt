@@ -2,3 +2,5 @@ openai
 Pillow
 fastapi
 uvicorn
+httpx
+python-dotenv

@@ -24,20 +24,21 @@ function RecipeSelection() {
             const userId = 1234; // Replace with a valid user ID
             fetch(`http://localhost:8000/recommendations/${userId}`)
                 .then(response => response.json())
-                .then(data => {
+                .then(async data => {
                     if (data.length === 0 && retryCount < maxRetries) {
                         console.log("API Response: [], retrying..."); // Log the response data
                         setRetryCount(prevCount => prevCount + 1);
                         fetchRecipes(); // Retry fetching
                     } else {
-                        console.log("API Response:", data); // Log the response data
-                        setRetryCount(0); // Reset retry count after successful fetch
-                        // Process data normally
-                        const formattedData = data.map((item, index) => ({
-                            id: index,
-                            name: item[0],
-                            type: item[1],
-                            imageUrl: getRandomImageUrlForType(item[1])
+                        console.log("API Response:", data);
+                        const formattedData = await Promise.all(data.map(async (item, index) => {
+                            const imageUrl = await fetchImageUrl(item[0]);
+                            return {
+                                id: index,
+                                name: item[0],
+                                type: item[1],
+                                imageUrl: imageUrl || '/path/to/default.jpg' // Fallback to a default image
+                            };
                         }));
                         setRecipes(formattedData);
                     }
@@ -54,6 +55,15 @@ function RecipeSelection() {
             fetchRecipes();
         }
     }, [retryCount]);
+
+
+
+
+    const fetchImageUrl = (recipeName) => {
+        return fetch(`http://localhost:8000/image-search/${encodeURIComponent(recipeName)}`)
+            .then(response => response.json())
+            .then(data => data.image_url);  // Get the image URL from the response
+    };
 
 
 

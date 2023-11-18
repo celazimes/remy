@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from openai import AsyncOpenAI, OpenAI
 import time
@@ -6,6 +6,13 @@ import re
 import random
 from PIL import Image
 import os
+import httpx
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+PEXELS_API_KEY = os.environ.get("PEXELS_API_KEY")
 
 app = FastAPI()
 
@@ -128,6 +135,22 @@ def get_recommendation(user_id: int, q: str = None):
 def get_desription(recipe_name: str):
     recom_descr = ask_gpt_recipe_desc(sync_client, recipe_name)
     return {"dish name": recipe_name, "recipe": recom_descr}
+
+
+@app.get("/image-search/{recipe_name}")
+async def image_search(recipe_name: str):
+    url = f"https://api.pexels.com/v1/search?query={recipe_name}&per_page=1"
+    headers = {"Authorization": PEXELS_API_KEY}
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url, headers=headers)
+
+        if response.status_code != 200:
+            raise HTTPException(status_code=400, detail="Error fetching image from Pexels")
+
+        data = response.json()
+        image_url = data["photos"][0]["src"]["medium"] if data["photos"] else None
+        return {"image_url": image_url}
 
 
 if __name__ == '__main__':
