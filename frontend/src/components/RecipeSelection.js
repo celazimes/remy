@@ -14,17 +14,22 @@ function RecipeSelection() {
     const navigate = useNavigate();
     const [retryCount, setRetryCount] = useState(0);
     const maxRetries = 3; // Set a limit for retries to avoid infinite loops
+    const [isLoading, setIsLoading] = useState(true);
+    const [imagesLoaded, setImagesLoaded] = useState(0);
+
 
 
     // console.log("API Response:", data); // Log the response data
 
 
     useEffect(() => {
+        setIsLoading(true); // Start loading
         const fetchRecipes = () => {
             const userId = 1234; // Replace with a valid user ID
             fetch(`http://localhost:8000/recommendations/${userId}`)
                 .then(response => response.json())
                 .then(async data => {
+                    setImagesLoaded(0); // Reset for new images
                     if (data.length === 0 && retryCount < maxRetries) {
                         console.log("API Response: [], retrying..."); // Log the response data
                         setRetryCount(prevCount => prevCount + 1);
@@ -57,7 +62,17 @@ function RecipeSelection() {
     }, [retryCount]);
 
 
+    useEffect(() => {
+        if (recipes.length > 0 && imagesLoaded === recipes.length) {
+            setIsLoading(false); // Hide spinner only after all images have loaded
+        }
+    }, [imagesLoaded, recipes.length]);
 
+
+
+    const handleImageLoad = () => {
+        setImagesLoaded(prev => prev + 1);
+    };
 
     const fetchImageUrl = (recipeName) => {
         return fetch(`http://localhost:8000/image-search/${encodeURIComponent(recipeName)}`)
@@ -65,6 +80,11 @@ function RecipeSelection() {
             .then(data => data.image_url);  // Get the image URL from the response
     };
 
+    const LoadingOverlay = () => (
+        <div className="loading-overlay">
+            <div className="spinner"></div> {/* Replace with your spinner or loading animation */}
+        </div>
+    );
 
 
     const getRandomImageUrlForType = (type) => {
@@ -110,6 +130,39 @@ function RecipeSelection() {
 
     return (
         <div className="page-container">
+            {isLoading && <LoadingOverlay />}
+            {rows.map((rowRecipes, rowIndex) => (
+                <div key={rowIndex} className="recipe-row">
+                    {rowRecipes.map(recipe => (
+                        <div
+                            key={recipe.id}
+                            className={`recipe-card ${selectedRecipes.includes(recipe.id) ? 'selected' : ''}`}
+                            onClick={() => handleSelectRecipe(recipe.id)}
+                        >
+                            <img
+                                src={recipe.imageUrl}
+                                alt={recipe.name}
+                                className="recipe-image"
+                                onLoad={handleImageLoad}
+                                onError={handleImageLoad} // Handle image load errors
+                            />
+                            <div className="recipe-info">
+                                <h3 className="recipe-title">{recipe.name}</h3>
+                                <span
+                                    className="info-icon"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleMoreInfo(recipe.id);
+                                    }}
+                                >ⓘ</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ))}
+            <button className="submit-button" onClick={handleSubmitSelection}>Submit Selection</button>
+
+            {/* Modal for displaying more information about a recipe */}
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={handleCloseModal}
@@ -121,32 +174,9 @@ function RecipeSelection() {
                 <p>This is some dummy text for the recipe {currentRecipeInfo?.name}.</p>
                 <button onClick={handleCloseModal}>Close</button>
             </Modal>
-            <h2>Select Recipes</h2>
-            {rows.map((rowRecipes, rowIndex) => (
-                <div key={rowIndex} className="recipe-row">
-                    {rowRecipes.map(recipe => (
-                        <div
-                            key={recipe.id}
-                            className={`recipe-card ${selectedRecipes.includes(recipe.id) ? 'selected' : ''}`}
-                            onClick={() => handleSelectRecipe(recipe.id)}
-                        >
-                            <img src={recipe.imageUrl} alt={recipe.name} className="recipe-image"/>
-                            <div className="recipe-info">
-                                <h3 className="recipe-title">{recipe.name}</h3>
-                                <span
-                                    className="info-icon"
-                                    onClick={(e) => handleMoreInfo(e, recipe.id)}
-                                >ⓘ</span>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            ))}
-
-
-            <button className="submit-button" onClick={handleSubmitSelection}>Submit Selection</button>
         </div>
     );
+
 }
 
 export default RecipeSelection;
