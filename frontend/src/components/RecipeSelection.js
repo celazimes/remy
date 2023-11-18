@@ -1,59 +1,9 @@
 // src/components/RecipeSelection.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 import '../styles.css'; // Import the shared CSS file
 
-// Mock data - replace with real data fetching logic
-const mockRecipes = [
-    { id: 1, name: 'Spaghetti Carbonara', imageUrl: '/images/1.jpeg' },
-    { id: 2, name: 'Margherita Pizza', imageUrl: '/images/2.jpeg' },
-    { id: 3, name: 'Caesar Salad', imageUrl: '/images/3.jpeg' },
-    { id: 4, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 5, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 6, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 7, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 8, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 9, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 10, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 11, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 12, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 13, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 14, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 15, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 16, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 17, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 18, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 19, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 20, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 21, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 22, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 23, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 24, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-    { id: 25, name: 'Spaghetti Carbonara', imageUrl: '/images/2.jpeg' },
-
-];
 
 Modal.setAppElement('#root'); // Assuming your root div has the id 'root'
 
@@ -61,9 +11,38 @@ Modal.setAppElement('#root'); // Assuming your root div has the id 'root'
 
 function RecipeSelection() {
     const [selectedRecipes, setSelectedRecipes] = useState([]);
+    const [recipes, setRecipes] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [currentRecipeInfo, setCurrentRecipeInfo] = useState(null);
     const navigate = useNavigate();
+
+    // console.log("API Response:", data); // Log the response data
+
+
+    useEffect(() => {
+        const userId = 1234; // Replace with a valid user ID
+        fetch(`http://localhost:8000/recommendations/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("API Response:", data); // Log the response data
+                const formattedData = data.map((item, index) => ({
+                    id: index,
+                    name: item[0],
+                    type: item[1],
+                    imageUrl: getRandomImageUrlForType(item[1]) // Get random image based on type
+                }));
+                setRecipes(formattedData);
+            })
+            .catch(error => {
+                console.error('Error fetching recipes:', error);
+            });
+    }, []);
+
+
+    const getRandomImageUrlForType = (type) => {
+        const imageNumber = Math.floor(Math.random() * 5) + 1; // Random number between 1 and 5
+        return `/img_db/${type}_${imageNumber}.jpg`; // Construct the image URL
+    };
 
     const handleSelectRecipe = (recipeId) => {
         setSelectedRecipes(prevSelected => {
@@ -73,8 +52,8 @@ function RecipeSelection() {
                 return [...prevSelected, recipeId];
             }
         });
-
     };
+
 
     const handleSubmitSelection = () => {
         // Logic to handle the recipe selection
@@ -84,7 +63,7 @@ function RecipeSelection() {
 
     const handleMoreInfo = (e, recipeId) => {
         e.stopPropagation();
-        const recipe = mockRecipes.find(r => r.id === recipeId);
+        const recipe = recipes.find(r => r.id === recipeId); // Use the real recipes
         setCurrentRecipeInfo(recipe);
         setModalIsOpen(true);
     };
@@ -97,8 +76,8 @@ function RecipeSelection() {
         setCurrentRecipeInfo(null);
     };
 
-    const rows = Array.from({ length: Math.ceil(mockRecipes.length / 5) }, (_, i) =>
-        mockRecipes.slice(i * 5, i * 5 + 5)
+    const rows = Array.from({ length: Math.ceil(recipes.length / 5) }, (_, i) =>
+        recipes.slice(i * 5, i * 5 + 5)
     );
 
     return (
@@ -126,16 +105,14 @@ function RecipeSelection() {
                             <img src={recipe.imageUrl} alt={recipe.name} className="recipe-image"/>
                             <div className="recipe-info">
                                 <h3 className="recipe-title">{recipe.name}</h3>
-                                <span
-                                    className="info-icon"
-                                    onClick={(e) => handleMoreInfo(e, recipe.id)}>
-                                    ⓘ
-                                </span>
+                                {/* Additional recipe info like type */}
                             </div>
                         </div>
                     ))}
                 </div>
             ))}
+
+
             <button className="submit-button" onClick={handleSubmitSelection}>Submit Selection</button>
         </div>
     );

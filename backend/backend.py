@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from openai import AsyncOpenAI, OpenAI
 import time
 import re
@@ -7,6 +8,14 @@ from PIL import Image
 import os
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 recipes_list_pattern = '''Provide names of recipes together with their food types based on the users description 
 Names of 5 recipes in the following format: recipe name # food type (one of the following: Pizza, Hamburger, Pasta, Cake)
@@ -109,9 +118,10 @@ async def create_user(user_pref_data: dict):
 
 
 @app.get("/recommendations/{user_id}")
-def get_recommendation(item_id: int, q: str = None):
-    recommendation_list = ask_gpt_recipe_list(sync_client)
+def get_recommendation(user_id: int, q: str = None):
+    recommendation_list = ask_gpt_recipe_list(sync_client, user_id) # if the function needs it
     return recommendation_list
+
 
 
 @app.get("/recommendations/recipe_desc{recipe_name}")
