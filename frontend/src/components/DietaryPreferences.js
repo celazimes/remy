@@ -1,6 +1,7 @@
 // src/components/DietaryPreferences.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles.css'; // Import the shared CSS file
 
 function DietaryPreferences() {
     const [diet, setDiet] = useState('');
@@ -12,15 +13,15 @@ function DietaryPreferences() {
     };
 
     return (
-        <div>
+        <div className="page-container">
             <h2>Select your dietary preferences</h2>
-            <select value={diet} onChange={e => setDiet(e.target.value)}>
+            <select className="select-input" value={diet} onChange={e => setDiet(e.target.value)}>
                 <option value="">--Please choose an option--</option>
                 <option value="vegan">Vegan</option>
                 <option value="halal">Halal</option>
                 {/* Add more options as needed */}
             </select>
-            <button onClick={handleNext}>Next</button>
+            <button className="next-button" onClick={handleNext}>Next</button>
         </div>
     );
 }
