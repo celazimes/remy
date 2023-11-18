@@ -55,7 +55,7 @@ function DietaryPreferences() {
     }
 
     .diet-card.selected {
-      border: 3px solid #54db54; /* Thicker green border for selected cards */
+      border: 3px solid #54db54;
     }
 
     .diet-card:hover {
@@ -72,7 +72,7 @@ function DietaryPreferences() {
     .diet-label {
       padding: 10px;
       text-align: center;
-      height: 50%; /* Adjust based on your design preference */
+      height: 30%; /* Adjust based on your design preference */
       overflow: hidden;
     }
   `;

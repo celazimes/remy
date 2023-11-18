@@ -42,8 +42,8 @@ function AllergiesSelection() {
 
     .allergy-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* Adjust based on your design preference */
-      gap: 20px;
+      grid-template-columns: repeat(8,1fr); /* Adjust based on your design preference */
+      gap: 20px; 
       margin: 20px 0;
     }
 
@@ -69,14 +69,14 @@ function AllergiesSelection() {
 
     .allergy-image {
       width: 100%;
-      height: 80%; /* Adjust based on your design preference */
+      height: 100%; /* Adjust based on your design preference */
       object-fit: cover;
     }
 
     .allergy-info {
       padding: 10px;
       text-align: center;
-      height: 50%; /* Adjust based on your design preference */
+      height: 30%; /* Adjust based on your design preference */
       overflow: hidden;
     }
   `;
