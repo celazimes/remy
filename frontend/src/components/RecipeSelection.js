@@ -12,28 +12,49 @@ function RecipeSelection() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [currentRecipeInfo, setCurrentRecipeInfo] = useState(null);
     const navigate = useNavigate();
+    const [retryCount, setRetryCount] = useState(0);
+    const maxRetries = 3; // Set a limit for retries to avoid infinite loops
+
 
     // console.log("API Response:", data); // Log the response data
 
 
     useEffect(() => {
-        const userId = 1234; // Replace with a valid user ID
-        fetch(`http://localhost:8000/recommendations/${userId}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log("API Response:", data); // Log the response data
-                const formattedData = data.map((item, index) => ({
-                    id: index,
-                    name: item[0],
-                    type: item[1],
-                    imageUrl: getRandomImageUrlForType(item[1]) // Get random image based on type
-                }));
-                setRecipes(formattedData);
-            })
-            .catch(error => {
-                console.error('Error fetching recipes:', error);
-            });
-    }, []);
+        const fetchRecipes = () => {
+            const userId = 1234; // Replace with a valid user ID
+            fetch(`http://localhost:8000/recommendations/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length === 0 && retryCount < maxRetries) {
+                        console.log("API Response: [], retrying..."); // Log the response data
+                        setRetryCount(prevCount => prevCount + 1);
+                        fetchRecipes(); // Retry fetching
+                    } else {
+                        console.log("API Response:", data); // Log the response data
+                        setRetryCount(0); // Reset retry count after successful fetch
+                        // Process data normally
+                        const formattedData = data.map((item, index) => ({
+                            id: index,
+                            name: item[0],
+                            type: item[1],
+                            imageUrl: getRandomImageUrlForType(item[1])
+                        }));
+                        setRecipes(formattedData);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching recipes:', error);
+                    if (retryCount >= maxRetries) {
+                        setRetryCount(0); // Reset retry count after reaching max retries
+                    }
+                });
+        };
+
+        if (retryCount === 0) {
+            fetchRecipes();
+        }
+    }, [retryCount]);
+
 
 
     const getRandomImageUrlForType = (type) => {
