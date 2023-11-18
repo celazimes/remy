@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
     padding: 20px;
 }
 
@@ -18,7 +18,7 @@
 .next-button,
 .submit-button {
     padding: 10px 20px;
-    background-color: #61dafb;
+    background-color: #54db54;
     color: white;
     border: none;
     border-radius: 4px;
@@ -29,13 +29,13 @@
 
 .next-button:hover,
 .submit-button:hover {
-    background-color: #4fa3d1;
+    background-color: #379a3f;
 }
 
 /* src/styles.css */
 .start-button {
     padding: 10px 20px;
-    background-color: #61dafb;
+    background-color: #54db54;
     color: white;
     text-decoration: none;
     border: none;
@@ -46,7 +46,7 @@
   }
   
   .start-button:hover {
-    background-color: #4fa3d1;
+    background-color: #379a3f;
   }
   
   /* src/styles.css */
