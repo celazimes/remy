@@ -9,7 +9,7 @@ function DietaryPreferences() {
 
     const handleNext = () => {
         // Here you can also save the selected diet preference
-        navigate('/select-recipes'); // Navigate to the recipe selection page
+        navigate('/allergies'); // Navigate to the recipe selection page
     };
 
     return (

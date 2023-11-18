@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import DietaryPreferences from './components/DietaryPreferences';
 import RecipeSelection from './components/RecipeSelection';
 import ReviewRecipes from './components/ReviewRecipes';
+import AllergiesSelection from './components/AllergiesSelection'; // Create this component
 import './styles.css';
 
 const Header = () => (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/onboarding" element={<DietaryPreferences />} />
         <Route path="/select-recipes" element={<RecipeSelection />} />
         <Route path="/review-recipes" element={<ReviewRecipes />} />
+        <Route path="/allergies" element={<AllergiesSelection />} />
         <Route path="/" element={
           <div className="page-container">
             <h1>Welcome to the Recipe App</h1>
