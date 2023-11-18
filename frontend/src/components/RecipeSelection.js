@@ -4,10 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 import '../styles.css'; // Import the shared CSS file
 
-
 Modal.setAppElement('#root'); // Assuming your root div has the id 'root'
-
-
 
 function RecipeSelection() {
     const [selectedRecipes, setSelectedRecipes] = useState([]);
@@ -105,7 +102,10 @@ function RecipeSelection() {
                             <img src={recipe.imageUrl} alt={recipe.name} className="recipe-image"/>
                             <div className="recipe-info">
                                 <h3 className="recipe-title">{recipe.name}</h3>
-                                {/* Additional recipe info like type */}
+                                <span
+                                    className="info-icon"
+                                    onClick={(e) => handleMoreInfo(e, recipe.id)}
+                                >ⓘ</span>
                             </div>
                         </div>
                     ))}
