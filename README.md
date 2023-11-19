@@ -1,5 +1,14 @@
 ## REMY
 ![Remy](frontend/public/remy.png)
+
+## Get Started
+First, follow the README file in backend. You will need a ChatGPT API Key to bring the backend up!
+When it's up, cd to frontend, and them
+npm install
+npm start
+
+A browser window should open up with Remy already in it!
+
 ## Inspiration
 Our group was mainly inspired by the versatility offered from machine learning models, as well as the colourful variety that the culinary world offers. We wanted to do something different than just bringing the customer to a pre-defined recipe that is likely to be fitting. Therefore, we decided to bring the recipe to the user - not limiting us to a finite dataset of foods, but rather generating a set of recipes created just for the user.
 ## What it does
