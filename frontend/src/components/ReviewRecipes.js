@@ -36,7 +36,7 @@ function ReviewRecipes({ selectedRecipess }) {
     };
 
     return (
-        <div className="page-container">
+        <div className="RACING">
             {/* Display selected recipes with rating sliders */}
             {selectedRecipes.map(recipe => (
                 <div key={recipe.id} className="recipe-review" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px'}}>

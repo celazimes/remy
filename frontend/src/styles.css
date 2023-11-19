@@ -1,4 +1,19 @@
 /* src/styles.css */
+
+
+.RACING {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+    background-color: #f4f4f4;
+    padding: 20px 20px 50px; /* Padding at the bottom for extra space */
+    min-height: 100vh; /* Use viewport height to ensure full coverage */
+    margin-top: 10px; 
+}
+
+
+
+
 .page-container {
     display: flex;
     flex-direction: column;
@@ -53,10 +68,10 @@
   }
   
   /* src/styles.css */
-.header {
+  .header {
     height: 80px; /* Ensure this is the actual height of your header */
     position: sticky;
-    top: 0;
+    top: 0; /* Ensure it's at the top of the page */
     width: 100%;
     z-index: 1000; /* Ensure it's above other content */
     display: flex;
@@ -64,7 +79,8 @@
     align-items: center;
     background-color: #ffffff;
     padding: 10px 20px;
-  }
+}
+
 
 body {
     background-color: #f4f4f4; /* Set your desired background color */
@@ -231,3 +247,19 @@ body {
 
 
 
+/* Add this to your styles.css */
+.page-container.review-recipes-page {
+    margin-top: 0; /* Set marginTop to 0 for ReviewRecipes.js page */
+}
+
+/* Add this to your styles.css */
+.header-text {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-text h1 {
+    font-size: 36px; /* Adjust the font size as needed */
+    margin: 0; /* Remove default margin */
+}
