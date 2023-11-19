@@ -312,4 +312,6 @@ body {
     margin-bottom: 20px; /* Space between each card-slider pair */
 }
 
-
+h2 {
+    font-size: 40px;
+}

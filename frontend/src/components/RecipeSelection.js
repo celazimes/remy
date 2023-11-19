@@ -180,7 +180,7 @@ function RecipeSelection() {
                     ))}
                 </div>
             ))}
-            <button className="submit-button" onClick={handleSubmitSelection}>Submit Selection</button>
+            <button className="submit-button" onClick={handleSubmitSelection}>Submit</button>
 
             {/* Modal for displaying more information about a recipe */}
             <Modal
