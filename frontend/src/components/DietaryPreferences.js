@@ -60,6 +60,10 @@ function DietaryPreferences() {
       border: 3px solid #54db54;
     }
 
+    .diet-card.selected h3 {
+      color: black;
+    }
+
     .diet-card:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);

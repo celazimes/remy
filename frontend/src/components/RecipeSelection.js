@@ -105,8 +105,10 @@ function RecipeSelection() {
 
     const handleSubmitSelection = () => {
         // Logic to handle the recipe selection
+        const selectedRecipeDetails = recipes.filter(recipe => selectedRecipes.includes(recipe.id));
+
         console.log("Selected Recipes:", selectedRecipes); // For debugging
-        navigate('/review-recipes'); // Navigate to the review recipes page
+        navigate('/review-recipes', { state: { selectedRecipes: selectedRecipeDetails } });
     };
 
     const handleMoreInfo = (e, recipeId) => {

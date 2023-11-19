@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles.css'; // Import the shared CSS file
 
 //remove one s from selectedRecipess and delete dummy data for prod
 function ReviewRecipes({ selectedRecipess }) {
     const navigate = useNavigate();
+    const location = useLocation();
+    const selectedRecipes = location.state?.selectedRecipes || [];
 
     const [ratings, setRatings] = useState({}); // State to store ratings for each recipe
 
     //usinng dummy recipes fr testing - remove this and change input name row 6
+    /*
     const selectedRecipes = [
         { id: 100, name: 'Dummy Recipe 1', type: 'dummy', imageUrl: '/dummy.jpeg' },
         { id: 101, name: 'Dummy Recipe 2', type: 'dummy', imageUrl: '/dummy1.jpeg' },
         { id: 102, name: 'Dummy Recipe 3', type: 'dummy', imageUrl: '/dummy2.jpeg' }
     ];
+    */
 
     const handleRatingChange = (recipeId, rating) => {
         setRatings(prevRatings => ({
@@ -24,12 +28,15 @@ function ReviewRecipes({ selectedRecipess }) {
 
     const handleSubmitReview = () => {
         // Logic to handle submitting the recipe reviews
+
+        // POST ratings to (some enspoint @ API)
+
         console.log("Recipe Ratings:", ratings); // Log the ratings for debugging
         navigate('/select-recipes'); // Navigate back to recipe selection for new suggestions
     };
 
     return (
-        <div className="page-container">
+        <div className="RACING">
             {/* Display selected recipes with rating sliders */}
             {selectedRecipes.map(recipe => (
                 <div key={recipe.id} className="recipe-review" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px'}}>
