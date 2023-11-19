@@ -71,7 +71,13 @@ def generate_user_id():
     return random.randint(1000, 9999)
 
 
-def ask_gpt_recipe_list(client, user_descr):
+def ask_gpt_recipe_list(client):
+    user_descr = initial_constr_user
+    if user_summary != '':
+        print('user has some rated dishes')
+        if user_descr != '':
+            user_descr += ','
+        user_descr += user_summary
     start_time = time.time()
     chat_recom_text = client.chat.completions.create(
         messages=[
@@ -182,7 +188,7 @@ async def post_restrictions(user_pref_data: list):
 
 @app.get("/recommendations/{user_id}")
 def get_recommendation(user_id: int, q: str = None):
-    recommendation_list = ask_gpt_recipe_list(sync_client, user_id)  # if the function needs it
+    recommendation_list = ask_gpt_recipe_list(sync_client)  # if the function needs it
     return recommendation_list
 
 
