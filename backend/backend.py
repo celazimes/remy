@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from openai import AsyncOpenAI, OpenAI
+from openai import OpenAI
 import time
 import re
 import random
@@ -24,30 +24,31 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-recipes_list_pattern = '''Provide names of recipes together with their food types based on the users description 
-Names of 5 recipes in the following format: recipe name # food type (one of the following: Pizza, Hamburger, Pasta, Cake)
-Examples:
-case: Given user likes italian food, is not vegan Recommend:  Salami Pizza 
-case: Given user likes spicy food, is vegan Recommend: spicy salad with tabasco sauce
-case: User {} Recommend: 
+recipes_list_pattern = '''
+Names of 5 recipes in the following format: recipe name
+Given {} Exclude dishes similar to disliked. Recommend similar to liked ones.
+Provide only names of recipes
 '''
+
 recipe_desc_pattern = '''Given a recipe name provide instructions on how to cook
-User {}
 Recipe name: {}
 Output: a numerated list of and ingredients 
 and enumerated cooking steps without an introduction.'''
 
+summarize_pattern = '''Users rates from 1 to 5 dishes, 5 being the best and 1 being the worst option. {}. 
+Summarize user's taste profile in 1 sentence. Do not recommend dishes similar to the low score.
+'''
+# take out number eg 1. leave only dish name
+rec_list_pattern = r'[0-9]+\. (.*)'
 
-rec_list_pattern = r'[0-9]+\. (.*) # (.*)'
 f = open("keys.txt", "r")
 lines = f.readlines()
-f.close()  # inefficint reading from file of 1 variable, because we don't keep keys in public repository
+f.close()  # reading from file the api keys, because we don't keep keys in public repository
 global_api_key = lines[0]
 # create clients
 sync_client = OpenAI(api_key=global_api_key)
-
+# here could be a database
 the_database = dict()
-image_db = {}
 
 def generate_user_id():
     return random.randint(1000, 9999)
@@ -98,10 +99,6 @@ def read_images():
     # Now image_dict contains images with filenames (without extensions) as keys
     return images_dict
 
-
-def get_image(class_type):
-    image_key = "{}_{}".format(class_type, str(random.randint(1, 5)))
-    return image_db[image_key]
 
 ###############################post and get requests################################
 @app.get("/")
