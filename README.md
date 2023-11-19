@@ -1,4 +1,4 @@
-## REMY - The Recipe Rat
+## REMY
 ![Remy](frontend/public/remy.png)
 ## Inspiration
 Our group was mainly inspired by the versatility offered from machine learning models, as well as the colourful variety that the culinary world offers. We wanted to do something different than just bringing the customer to a pre-defined recipe that is likely to be fitting. Therefore, we decided to bring the recipe to the user - not limiting us to a finite dataset of foods, but rather generating a set of recipes created just for the user.
