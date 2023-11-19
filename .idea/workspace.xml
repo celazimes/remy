@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c0a145a6-47c1-4866-836c-627f529b6e75" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/RecipeSelection.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RecipeSelection.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/ReviewRecipes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ReviewRecipes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

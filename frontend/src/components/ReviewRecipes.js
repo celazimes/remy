@@ -10,23 +10,15 @@ function ReviewRecipes({ selectedRecipess }) {
 
     const [ratings, setRatings] = useState({}); // State to store ratings for each recipe
 
-    //usinng dummy recipes fr testing - remove this and change input name row 6
-    /*
-    const selectedRecipes = [
-        { id: 100, name: 'Dummy Recipe 1', type: 'dummy', imageUrl: '/dummy.jpeg' },
-        { id: 101, name: 'Dummy Recipe 2', type: 'dummy', imageUrl: '/dummy1.jpeg' },
-        { id: 102, name: 'Dummy Recipe 3', type: 'dummy', imageUrl: '/dummy2.jpeg' }
-    ];
-    */
-
-    const handleRatingChange = (recipeId, rating) => {
+    const handleRatingChange = (recipeName, rating) => {
         setRatings(prevRatings => ({
             ...prevRatings,
-            [recipeId]: rating,
+            [recipeName]: rating, // Use recipe name as the key
         }));
     };
 
     const handleSubmitReview = async () => {
+        console.log('Submitting ratings:', ratings);
         try {
             const response = await fetch('http://localhost:8000/submit-ratings', {
                 method: 'POST',
@@ -46,13 +38,10 @@ function ReviewRecipes({ selectedRecipess }) {
         }
     };
 
-    const handleMoreInfo = (e, recipeId) => {
+    const handleMoreInfo = (e, recipeName) => {
         e.stopPropagation();
-        //const recipe = recipes.find(r => r.id === recipeId); // Use the real recipes
-        // setCurrentRecipeInfo(recipe);
-        // setModalIsOpen(true);
+        // Additional logic if needed
     };
-
 
     return (
         <div className="page-container review-recipes-page">
@@ -66,7 +55,7 @@ function ReviewRecipes({ selectedRecipess }) {
                                 className="info-icon"
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    handleMoreInfo(recipe.id);
+                                    handleMoreInfo(recipe.name);
                                 }}
                             >ⓘ</span>
                         </div>
@@ -77,10 +66,10 @@ function ReviewRecipes({ selectedRecipess }) {
                             type="range"
                             min="0"
                             max="10"
-                            value={ratings[recipe.id] || 5}
-                            onChange={(e) => handleRatingChange(recipe.id, parseInt(e.target.value, 10))}
+                            value={ratings[recipe.name] || 5}
+                            onChange={(e) => handleRatingChange(recipe.name, parseInt(e.target.value, 10))}
                         />
-                        <span>{ratings[recipe.id] || 5}</span>
+                        <span>{ratings[recipe.name] || 5}</span>
                     </div>
                 </div>
             ))}

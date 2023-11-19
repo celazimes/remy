@@ -36,10 +36,15 @@ Given {} Exclude dishes similar to disliked. Recommend similar to liked ones.
 Provide only names of recipes
 '''
 
-recipe_desc_pattern = '''Given a recipe name provide instructions on how to cook
+recipe_desc_pattern_old = '''Given a recipe name provide instructions on how to cook
 Recipe name: {}
 Output: a numerated list of and ingredients 
 and enumerated cooking steps without an introduction.'''
+
+recipe_desc_pattern = '''Provide very brief instructions on how to cook
+Recipe name: {}. Be as brief as possible.
+Output: a numerated list of max 5 ingredients
+and max 5 enumerated cooking steps without an introduction.'''
 
 summarize_pattern = '''Users rates from 1 to 5 dishes, 5 being the best and 1 being the worst option. {}. 
 Summarize user's taste profile in 1 sentence. Do not recommend dishes similar to the low score.
@@ -112,7 +117,7 @@ def get_recommendation(item_id: int, q: str = None):
     return {'some salutation': 'Hii'}
 
 @app.post("/submit-ratings")
-async def submit_ratings(ratings: Dict[int, int]):
+async def submit_ratings(ratings: Dict[str, int]):
     try:
         # Process the ratings here
         # For example, store them in a database
@@ -143,9 +148,10 @@ def get_recommendation(user_id: int, q: str = None):
 
 
 
-@app.get("/recommendations/recipe_desc{recipe_name}")
+@app.get("/recommendations/recipe_desc/{recipe_name}")
 def get_desription(recipe_name: str):
-    recom_descr = ask_gpt_recipe_desc(sync_client, recipe_name)
+    recom_descr = ask_gpt_recipe_desc(sync_client, recipe_name, "likes chicken")
+    print(recom_descr)
     return {"dish name": recipe_name, "recipe": recom_descr}
 
 

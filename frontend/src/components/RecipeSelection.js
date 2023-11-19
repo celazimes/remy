@@ -110,13 +110,32 @@ function RecipeSelection() {
         navigate('/review-recipes', { state: { selectedRecipes: selectedRecipeDetails } });
     };
 
-    const handleMoreInfo = (e, recipeId) => {
-        e.stopPropagation();
-        const recipe = recipes.find(r => r.id === recipeId); // Use the real recipes
-        setCurrentRecipeInfo(recipe);
-        setModalIsOpen(true);
-    };
 
+    const handleMoreInfo = async (e, recipeId) => {
+        e.stopPropagation();
+        const recipe = recipes.find(r => r.id === recipeId);
+
+        // Set current recipe info and open the modal immediately with a loading message
+        setCurrentRecipeInfo({ ...recipe, details: "Loading..." });
+        setModalIsOpen(true);
+
+        // Fetch the details
+        try {
+            const url = `http://localhost:8000/recommendations/recipe_desc/${encodeURIComponent(recipe.name)}`;
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("Recipe details:", data.recipe);
+            setCurrentRecipeInfo({ ...recipe, details: data.recipe});
+        } catch (error) {
+            console.error('Error fetching recipe details:', error);
+            setCurrentRecipeInfo({ ...recipe, details: "Error loading recipe details." });
+        }
+    };
 
 
     // Handler to close the modal
@@ -153,7 +172,7 @@ function RecipeSelection() {
                                     className="info-icon"
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        handleMoreInfo(recipe.id);
+                                        handleMoreInfo(e, recipe.id);
                                     }}
                                 >ⓘ</span>
                             </div>
@@ -168,13 +187,14 @@ function RecipeSelection() {
                 isOpen={modalIsOpen}
                 onRequestClose={handleCloseModal}
                 contentLabel="Recipe Information"
-                className="your-custom-modal-class" // Custom class for the modal
-                overlayClassName="your-custom-overlay-class" // Custom class for the overlay
+                className="your-custom-modal-class"
+                overlayClassName="your-custom-overlay-class"
             >
                 <h2>{currentRecipeInfo?.name}</h2>
-                <p>This is some dummy text for the recipe {currentRecipeInfo?.name}.</p>
+                <p>{currentRecipeInfo?.details}</p>
                 <button onClick={handleCloseModal}>Close</button>
             </Modal>
+
         </div>
     );
 
