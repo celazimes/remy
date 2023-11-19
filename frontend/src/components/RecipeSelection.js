@@ -37,11 +37,10 @@ function RecipeSelection() {
                     } else {
                         console.log("API Response:", data);
                         const formattedData = await Promise.all(data.map(async (item, index) => {
-                            const imageUrl = await fetchImageUrl(item[0]);
+                            const imageUrl = await fetchImageUrl(item);
                             return {
                                 id: index,
-                                name: item[0],
-                                type: item[1],
+                                name: item,
                                 imageUrl: imageUrl || '/path/to/default.jpg' // Fallback to a default image
                             };
                         }));
