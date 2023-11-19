@@ -64,6 +64,10 @@ function AllergiesSelection() {
       border: 3px solid #54db54; /* Thicker green border for selected cards */
     }
 
+    .allergy-card.selected h3 {
+      color: black;
+    }
+
     .allergy-card:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -87,7 +91,7 @@ function AllergiesSelection() {
     <div>
       <style>{allergyStyles}</style>
       <div className="page-container">
-        <h2>Do you have any allergies?</h2>
+        <h2 style={{color: 'black'} }>Do you have any allergies?</h2>
         <div className="allergy-grid">
           {allergies.map((allergy) => (
             <div
