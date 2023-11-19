@@ -30,6 +30,10 @@ class Rating(BaseModel):
     recipeId: int
     rating: int
 
+
+pref_user = ""
+
+
 recipes_list_pattern = '''
 Names of 5 recipes in the following format: recipe name
 Given {} Exclude dishes similar to disliked. Recommend similar to liked ones.
@@ -121,6 +125,8 @@ async def submit_ratings(ratings: Dict[str, int]):
     try:
         # Process the ratings here
         # For example, store them in a database
+        pref_user = ', '.join([f'{key} {value}' for key, value in ratings.items()])
+
         print(ratings)
         return {"message": "Ratings submitted successfully"}
     except Exception as e:
