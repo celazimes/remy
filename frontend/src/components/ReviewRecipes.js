@@ -74,7 +74,7 @@ function ReviewRecipes({ selectedRecipess }) {
                 </div>
             ))}
             <button className="submit-button" onClick={handleSubmitReview}>
-                Submit Review
+                Submit
             </button>
         </div>
     );

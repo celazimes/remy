@@ -103,7 +103,7 @@ function DietaryPreferences() {
           ))}
         </div>
         <button className="next-button" onClick={handleNext}>
-          Next
+          Submit
         </button>
       </div>
     </div>

@@ -91,7 +91,7 @@ function AllergiesSelection() {
     <div>
       <style>{allergyStyles}</style>
       <div className="page-container">
-        <h2 style={{color: 'black'} }>Do you have any allergies?</h2>
+        <h2>Do you have any allergies?</h2>
         <div className="allergy-grid">
           {allergies.map((allergy) => (
             <div
@@ -109,7 +109,7 @@ function AllergiesSelection() {
           ))}
         </div>
         <button className="submit-button" onClick={handleNext}>
-          Submit Selection
+          Submit
         </button>
       </div>
     </div>
