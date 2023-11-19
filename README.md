@@ -1,5 +1,5 @@
 ## REMY
-![Remy](frontend/public/remy.png)
+![Remy](frontend/public/remy.png =250x250)
 
 ## Get Started
 First, follow the README file in backend. You will need a ChatGPT API Key to bring the backend up!
