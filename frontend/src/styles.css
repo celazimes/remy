@@ -117,7 +117,18 @@ body {
     flex: 0 0 auto; /* Prevent cards from shrinking */
     width: 200px; /* Adjust the width as needed */
     height: auto; /* Height adjusts to content */
+}
 
+.recipe-card-static {
+    border: 1px solid grey; /* 1px grey border for unselected cards */
+    outline: 3px solid transparent; /* Transparent outline for all cards */
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.3s ease, outline-color 0.3s ease;
+    flex: 0 0 auto; /* Prevent cards from shrinking */
+    width: 200px; /* Adjust the width as needed */
+    height: auto; /* Height adjusts to content */
 }
 
 .recipe-card.selected {
@@ -263,3 +274,42 @@ body {
     font-size: 36px; /* Adjust the font size as needed */
     margin: 0; /* Remove default margin */
 }
+
+
+.review-recipes-page .recipe-card,
+.review-recipes-page .slider-container {
+    width: 48%; /* Adjust width as needed, ensuring it sums up to less than 100% */
+    margin-right: 2%; /* Adjust margin for spacing */
+}
+
+
+.review-recipes-page .submit-button {
+    margin-top: 20px; /* Space above the submit button */
+}
+
+.review-recipes-page .recipe-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+
+
+.review-recipes-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align the card-slider containers */
+}
+
+.cards-container, .sliders-container {
+    width: 50%; /* Adjust as needed */
+}
+
+.review-recipes-page .card-slider-container {
+    display: flex;
+    width: 100%; /* Take full width of the parent */
+    align-items: center; /* Align card and slider vertically */
+    justify-content: space-between; /* Space out card and slider */
+    margin-bottom: 20px; /* Space between each card-slider pair */
+}
+
+

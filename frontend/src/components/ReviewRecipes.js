@@ -10,6 +10,15 @@ function ReviewRecipes({ selectedRecipess }) {
 
     const [ratings, setRatings] = useState({}); // State to store ratings for each recipe
 
+    //usinng dummy recipes fr testing - remove this and change input name row 6
+    /*
+    const selectedRecipes = [
+        { id: 100, name: 'Dummy Recipe 1', type: 'dummy', imageUrl: '/dummy.jpeg' },
+        { id: 101, name: 'Dummy Recipe 2', type: 'dummy', imageUrl: '/dummy1.jpeg' },
+        { id: 102, name: 'Dummy Recipe 3', type: 'dummy', imageUrl: '/dummy2.jpeg' }
+    ];
+    */
+
     const handleRatingChange = (recipeId, rating) => {
         setRatings(prevRatings => ({
             ...prevRatings,
@@ -37,29 +46,41 @@ function ReviewRecipes({ selectedRecipess }) {
         }
     };
 
+    const handleMoreInfo = (e, recipeId) => {
+        e.stopPropagation();
+        //const recipe = recipes.find(r => r.id === recipeId); // Use the real recipes
+        // setCurrentRecipeInfo(recipe);
+        // setModalIsOpen(true);
+    };
+
 
     return (
-        <div className="page-container">
+        <div className="page-container review-recipes-page">
             {selectedRecipes.map(recipe => (
-                <div key={recipe.id} className="recipe-card">
-                    <img
-                        src={recipe.imageUrl}
-                        alt={recipe.name}
-                        className="recipe-image"
-                    />
-                    <div className="recipe-info">
-                        <h3 className="recipe-title">{recipe.name}</h3>
-                        <div className="rating-container">
-                            <p>Rate this recipe:</p>
-                            <input
-                                type="range"
-                                min="0"
-                                max="10"
-                                value={ratings[recipe.id] || 5}
-                                onChange={(e) => handleRatingChange(recipe.id, parseInt(e.target.value, 10))}
-                            />
-                            <span>{ratings[recipe.id] || 5}</span>
+                <div key={recipe.id} className="card-slider-container">
+                    <div className="recipe-card">
+                        <img src={recipe.imageUrl} alt={recipe.name} className="recipe-image" />
+                        <div className="recipe-info">
+                            <h3 className="recipe-title">{recipe.name}</h3>
+                            <span
+                                className="info-icon"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleMoreInfo(recipe.id);
+                                }}
+                            >ⓘ</span>
                         </div>
+                    </div>
+                    <div className="slider-container">
+                        <p>Rate {recipe.name}:</p>
+                        <input
+                            type="range"
+                            min="0"
+                            max="10"
+                            value={ratings[recipe.id] || 5}
+                            onChange={(e) => handleRatingChange(recipe.id, parseInt(e.target.value, 10))}
+                        />
+                        <span>{ratings[recipe.id] || 5}</span>
                     </div>
                 </div>
             ))}
