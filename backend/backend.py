@@ -1,4 +1,6 @@
 from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import Dict
 from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 import time
@@ -23,6 +25,10 @@ app.add_middleware(
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
 )
+
+class Rating(BaseModel):
+    recipeId: int
+    rating: int
 
 recipes_list_pattern = '''
 Names of 5 recipes in the following format: recipe name
@@ -105,6 +111,15 @@ def read_images():
 def get_recommendation(item_id: int, q: str = None):
     return {'some salutation': 'Hii'}
 
+@app.post("/submit-ratings")
+async def submit_ratings(ratings: Dict[int, int]):
+    try:
+        # Process the ratings here
+        # For example, store them in a database
+        print(ratings)
+        return {"message": "Ratings submitted successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/new_user}")
 async def create_user(user_pref_data: dict):
